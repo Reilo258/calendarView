@@ -26,9 +26,15 @@ class MainActivity : AppCompatActivity() {
         clndView.minDate = System.currentTimeMillis()
         clndView.maxDate = LocalDate.now().plusYears(2).atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
 
+        var odjazdDate = mutableListOf<Int>(0,0,0)
+        var przyjazdDate = mutableListOf<Int>(0,0,0)
+        var currentDate = arrayListOf<Int>(0,0,0)
 
-
-
+        clndView.setOnDateChangeListener() { CalendarView, x1, x2, x3 ->
+            currentDate[0] = x1
+            currentDate[1] = x2 + 1
+            currentDate[2] = x3
+        }
 
     }
 }
