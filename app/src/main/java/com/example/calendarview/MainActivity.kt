@@ -36,5 +36,16 @@ class MainActivity : AppCompatActivity() {
             currentDate[2] = x3
         }
 
+        wyjbtn.setOnClickListener {
+            odjazdDate[0] = currentDate[0]
+            odjazdDate[1] = currentDate[1]
+            odjazdDate[2] = currentDate[2]
+            wyjlbl.text = "Wyjazd: " + odjazdDate[0] + "." + odjazdDate[1] + "." + odjazdDate[2]
+        }
+
+        przybtn.setOnClickListener {
+
+        }
+
     }
 }
