@@ -1,5 +1,6 @@
 package com.example.calendarview
 
+import android.annotation.SuppressLint
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,10 +8,14 @@ import android.widget.Button
 import android.widget.CalendarView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.core.view.get
 import java.time.LocalDate
+import java.time.Year
 import java.time.ZoneId
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
+    @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,9 +31,11 @@ class MainActivity : AppCompatActivity() {
         clndView.minDate = System.currentTimeMillis()
         clndView.maxDate = LocalDate.now().plusYears(2).atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
 
+        val calendar = Calendar.getInstance()
+
         var odjazdDate = mutableListOf<Int>(0,0,0)
         var przyjazdDate = mutableListOf<Int>(0,0,0)
-        var currentDate = arrayListOf<Int>(0,0,0)
+        var currentDate = arrayListOf<Int>(calendar.get(Calendar.DAY_OF_MONTH),calendar.get(Calendar.MONTH),calendar.get(Calendar.YEAR))
 
         clndView.setOnDateChangeListener() { CalendarView, x1, x2, x3 ->
             currentDate[0] = x1
@@ -44,7 +51,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         przybtn.setOnClickListener {
-
+            przyjazdDate[0] = currentDate[0]
+            przyjazdDate[1] = currentDate[1]
+            przyjazdDate[2] = currentDate[2]
+            przylbl.text = "Przyjazd: " + przyjazdDate[0] + "." + przyjazdDate[1] + "." + przyjazdDate[2]
         }
 
     }
